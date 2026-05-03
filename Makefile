@@ -6,7 +6,7 @@
 #    By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/29 08:46:26 by texenber          #+#    #+#              #
-#    Updated: 2026/05/02 14:54:09 by texenber         ###   ########.fr        #
+#    Updated: 2026/05/03 09:42:00 by texenber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME		=	philo
 #ingredients
 
 SRC 		=	main.c	\
-				utils.c	
+				utils.c	\
+				parse.c
 SRCS		=	$(addprefix $(PRE), $(SRC))
 PRE			=	./src/
 HEAD		=	./inc/

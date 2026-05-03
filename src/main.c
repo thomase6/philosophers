@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 15:20:39 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/02 14:57:38 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/03 09:41:00 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	main(int ac, char **av)
 {
 	t_data *data;
 
-	if (ac != 5 && ac != 6)
-		return (ft_putstr_fd(TOO_MANY_ARGS, 2), 1);
+	if (parse_args(ac, av) == 1)
+		return (1);
 	
 	// init_data(data);
 }

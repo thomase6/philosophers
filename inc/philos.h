@@ -6,13 +6,15 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 09:15:43 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/02 14:50:08 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/03 11:31:50 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	PHILOS_H
 # define PHILOS_H
-# define TOO_MANY_ARGS "wrong argument count.\n"
+# define TOO_MANY_ARGS "Wrong argument count.\n"
+# define INVALID_ARGS "Invalid arguments.\n"
+# define INVALID_PHILOS "Invalid number of philos.\n"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -53,6 +55,13 @@ void	ft_putstr_fd(char *s, int fd);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int i);
 size_t	ft_strlen(const char *s);
+int		ft_strcmp(const char *s1, const char *s2);
 
+///		parsing the arguments		///
+int		parse_args(int argc, char **argv);
+int		valid_args(char **av);
+int		digit_check(char **av);
+int		overflow_check(char **av);
+int		is_overflow(char *str);
 
 #endif // PHILOS_H
