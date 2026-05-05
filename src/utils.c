@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 14:31:29 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/03 11:18:53 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/04 11:24:28 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	ft_isdigit(int i)
 	return (0);
 }
 
-// TODO: long long protection for this atoi
 int	ft_atoi(const char *str)
 {
 	int	i;

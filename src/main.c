@@ -6,89 +6,36 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 15:20:39 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/03 09:41:00 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/05 09:37:29 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../inc/philos.h"
 
-void	init_data(t_data data)
-{
-	data.p_num = 0;
-	data.time_to_d = 0;
-	data.time_to_e = 0;
-	data.time_to_s = 0;
-	data.num_of_meals = 0;
-	data.start = 0;
-	data.death_flag = 0;
-	// data.forks; // INITIALIZE
-	// data.death_mutex; // INITIALIZE
-	// data.print_mutex; // INITIALIZE
-}
-
 int	main(int ac, char **av)
 {
-	t_data *data;
-
+	t_data		data;
+	int64_t		i;
+	
 	if (parse_args(ac, av) == 1)
-		return (1);
-	
-	// init_data(data);
+		return (ERR_PARSING);
+	if (init_data(&data, av) == 1)
+		return (ERR_CREATING_MUTEX);
+	if (init_philos(&data) == 1)
+		return (ERR_ALLOC);
+	i = 0;
+	data.start = get_time();
+	while (i < data.p_num)
+	{
+		if (pthread_create(&data.philos[i].thread, NULL, routine, &data.philos[i]))
+			return (1);
+		i++;
+	}
+	i = 0;
+	while (i < data.p_num)
+	{
+		pthread_join(data.philos[i].thread, NULL);
+		i++;
+	}
+	return (SUCCESS);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void *routine(void *philo_id)
-// {
-// 	int64_t	*philoid = (int64_t *) philo_id;
-// 	printf("thread of philo number: %ld\n", *philoid);
-// 	sleep (3);
-// 	printf("ENDING THREAD OF PHILO NUMBER: %ld\n", *philoid);
-// 	return NULL;
-// }
-
-// int	main(int ac, char **av)
-// {
-// 	pthread_t t1, t2;
-// 	int64_t	philo_id = 0;
-// 	int64_t	philo_id1 = 1;
-
-// 	if (pthread_create(&t1, NULL, routine, (void *) &philo_id) != 0)
-// 		return (1);
-// 	if (pthread_create(&t2, NULL, routine, (void *) &philo_id1) != 0)
-// 		return (2);
-	
-// 	if (pthread_join(t1, NULL) != 0)
-// 		return (3);
-// 	if (pthread_join(t2, NULL) != 0)
-// 		return (4);
-// 	return 0;	
-// }

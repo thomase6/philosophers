@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 09:15:43 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/03 11:31:50 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/05 09:35:54 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # define TOO_MANY_ARGS "Wrong argument count.\n"
 # define INVALID_ARGS "Invalid arguments.\n"
 # define INVALID_PHILOS "Invalid number of philos.\n"
+# define MUTEX_FAIL "Mutex failed to create.\n"
+# define ALLOC_FAIL "Failed to malloc.\n"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -22,6 +24,8 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+typedef struct s_data	t_data;
+typedef struct s_philos	t_philos;
 
 typedef struct s_data
 {
@@ -32,10 +36,10 @@ typedef struct s_data
 	int64_t	num_of_meals;
 	int64_t	start;
 	int64_t	death_flag;
-	pthread_mutex_t	*forks;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	print_mutex;
-	
+	pthread_mutex_t	*forks;
+	t_philos	*philos;	
 }	t_data;
 
 typedef struct	s_philos
@@ -44,11 +48,19 @@ typedef struct	s_philos
 	int64_t	id;
 	int64_t	last_meal;
 	int64_t	meals_eaten;
-	t_data	*data;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	meal_mutex;
+	t_data	*data;
 }	t_philos;
+
+typedef enum e_error
+{
+	SUCCESS,
+	ERR_PARSING,
+	ERR_CREATING_MUTEX,
+	ERR_ALLOC
+}	t_error;
 
 ///		util functions		///
 void	ft_putstr_fd(char *s, int fd);
@@ -63,5 +75,18 @@ int		valid_args(char **av);
 int		digit_check(char **av);
 int		overflow_check(char **av);
 int		is_overflow(char *str);
+
+///		initialization				///
+int		init_data(t_data *data, char **av);
+int		init_mutex(t_data *data);
+int		init_philos(t_data *data);
+
+///		time functions		///
+int64_t	get_time(void);
+
+
+///		cleanup		///
+void	destroy_fork_mutexes(t_data *data, int count);
+void	precise_sleep(int64_t ms, t_data *data);
 
 #endif // PHILOS_H
