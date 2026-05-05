@@ -6,7 +6,7 @@
 #    By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/29 08:46:26 by texenber          #+#    #+#              #
-#    Updated: 2026/05/05 09:46:34 by texenber         ###   ########.fr        #
+#    Updated: 2026/05/05 17:50:42 by texenber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,10 @@ SRC 		=	main.c		\
 				parse.c		\
 				init.c		\
 				time.c		\
+				routine.c	\
+				locks.c		\
+				actions.c	\
+				monitor.c	\
 				cleanup.c	
 SRCS		=	$(addprefix $(PRE), $(SRC))
 PRE			=	./src/

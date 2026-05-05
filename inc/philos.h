@@ -6,17 +6,25 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 09:15:43 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/05 09:35:54 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/05 17:49:11 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	PHILOS_H
 # define PHILOS_H
+///		error messages		///
 # define TOO_MANY_ARGS "Wrong argument count.\n"
 # define INVALID_ARGS "Invalid arguments.\n"
 # define INVALID_PHILOS "Invalid number of philos.\n"
 # define MUTEX_FAIL "Mutex failed to create.\n"
 # define ALLOC_FAIL "Failed to malloc.\n"
+# define GET_TIME_ERR "Failed to get time.\n"
+///		action messages		///
+# define EAT "is eating."
+# define FORK "has taken a fork."
+# define SLEEP "is sleeping."
+# define THINK "is thinking."
+# define DIED "died."
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -83,7 +91,22 @@ int		init_philos(t_data *data);
 
 ///		time functions		///
 int64_t	get_time(void);
+void	ft_sleep(int64_t ms, t_data *data);
 
+///		routine and actions			///
+void	*routine(void *arg);
+void	eating(t_philos *philo);
+void	sleeping(t_philos *philo);
+void	thinking(t_philos *philo);
+
+///		mutex locks		///
+void	print_status(t_philos *philo, char *msg);
+int		is_dead(t_data *data);
+
+///		monitor and helper functions		///
+void	*monitor_r(void *arg);
+int		check_death(t_data *data);
+int		check_meals(t_data *data);
 
 ///		cleanup		///
 void	destroy_fork_mutexes(t_data *data, int count);

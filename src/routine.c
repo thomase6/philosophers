@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 09:13:32 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/05 12:12:30 by texenber         ###   ########.fr       */
+/*   Created: 2026/05/05 10:53:01 by texenber          #+#    #+#             */
+/*   Updated: 2026/05/05 11:50:53 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../inc/philos.h"
 
-int64_t	get_time(void)
+void	*routine(void *arg)
 {
-	struct	timeval	tv;
-
-	if (gettimeofday(&tv, NULL) == -1)
-		ft_putstr_fd(GET_TIME_ERR, 2);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
-void	ft_sleep(int64_t ms, t_data *data)
-{
-	int64_t start;
-
-	start = get_time();
-	while ((get_time() - start) < ms)
+	t_philos	*philo;
+	
+	philo = (t_philos *)arg;
+	while (!is_dead(philo->data))
 	{
-		if(is_dead(data))
-			break;
-		usleep(100);
+		eating(philo);
+		sleeping(philo);
+		thinking(philo);
 	}
+	return (NULL);
 }

@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   locks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 09:13:32 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/05 12:12:30 by texenber         ###   ########.fr       */
+/*   Created: 2026/05/05 10:03:59 by texenber          #+#    #+#             */
+/*   Updated: 2026/05/05 12:40:01 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../inc/philos.h"
 
-int64_t	get_time(void)
+int		is_dead(t_data *data)
 {
-	struct	timeval	tv;
+	int	res;
 
-	if (gettimeofday(&tv, NULL) == -1)
-		ft_putstr_fd(GET_TIME_ERR, 2);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+	pthread_mutex_lock(&data->death_mutex);
+	res = data->death_flag;
+	pthread_mutex_unlock(&data->death_mutex);
+	return (res);
 }
 
-void	ft_sleep(int64_t ms, t_data *data)
+void	print_status(t_philos *philo, char *msg)
 {
-	int64_t start;
-
-	start = get_time();
-	while ((get_time() - start) < ms)
-	{
-		if(is_dead(data))
-			break;
-		usleep(100);
-	}
+	pthread_mutex_lock(&philo->data->print_mutex);
+	if (!is_dead(philo->data))
+		printf("%ld %ld %s\n", get_time() - philo->data->start, philo->id, msg);
+	pthread_mutex_unlock(&philo->data->print_mutex);
 }
