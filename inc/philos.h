@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 09:15:43 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/05 17:49:11 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/06 09:22:11 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # define ALLOC_FAIL "Failed to malloc.\n"
 # define GET_TIME_ERR "Failed to get time.\n"
 ///		action messages		///
-# define EAT "is eating."
-# define FORK "has taken a fork."
-# define SLEEP "is sleeping."
-# define THINK "is thinking."
-# define DIED "died."
+# define EAT "is eating"
+# define FORK "has taken a fork"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIED "died"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -66,8 +66,8 @@ typedef enum e_error
 {
 	SUCCESS,
 	ERR_PARSING,
-	ERR_CREATING_MUTEX,
-	ERR_ALLOC
+	ERR_INIT_MUTEX,
+	ERR_INIT_PHILO
 }	t_error;
 
 ///		util functions		///
@@ -110,6 +110,7 @@ int		check_meals(t_data *data);
 
 ///		cleanup		///
 void	destroy_fork_mutexes(t_data *data, int count);
-void	precise_sleep(int64_t ms, t_data *data);
+void	destroy_meal_mutex(t_data *data, int count);
+void	cleanup(t_data *data);
 
 #endif // PHILOS_H

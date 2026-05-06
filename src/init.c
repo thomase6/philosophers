@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 13:35:48 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/05 12:59:19 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/06 09:09:18 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,16 @@ int	init_philos(t_data *data)
 	while (i < data->p_num)
 	{
 		data->philos[i].id = i + 1;
-		data->philos[i].last_meal = 0; // issues with this being set to zero 
+		data->philos[i].last_meal = 0;
 		data->philos[i].meals_eaten = 0;
 		data->philos[i].data = data;
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->p_num];
+		if (pthread_mutex_init(&data->philos[i].meal_mutex, NULL))
+		{
+			destroy_meal_mutex(data, i);
+			return (ft_putstr_fd(MUTEX_FAIL, 2), 1);
+		}
 		i++;
 	}
 	return (0);

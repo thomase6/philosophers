@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 15:20:39 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/05 17:46:42 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/06 09:17:36 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	main(int ac, char **av)
 	if (parse_args(ac, av) == 1)
 		return (ERR_PARSING);
 	if (init_data(&data, av) == 1)
-		return (ERR_CREATING_MUTEX);
+		return (ERR_INIT_MUTEX);
 	if (init_philos(&data) == 1)
-		return (ERR_ALLOC);
+		return (ERR_INIT_PHILO);
 	i = 0;
 	data.start = get_time();
 	while (i < data.p_num)
@@ -33,10 +33,11 @@ int	main(int ac, char **av)
 	}
 	i = 0;
 	if(pthread_create(&monitor, NULL, monitor_r, &data))
+		return (1);
 	while (i < data.p_num)
 	{
 		if (pthread_create(&data.philos[i].thread, NULL, routine, &data.philos[i]))
-			return (1);
+			return (cleanup(&data), 1);
 		i++;
 	}
 	pthread_join(monitor, NULL);
@@ -46,8 +47,9 @@ int	main(int ac, char **av)
 		pthread_join(data.philos[i].thread, NULL);
 		i++;
 	}
+	cleanup(&data);
 	return (SUCCESS);
 }
 
-//haven't handled single philos and still have to make the monitor
+//haven't handled single philos
 
