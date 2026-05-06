@@ -6,25 +6,25 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 09:15:43 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/06 09:22:11 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/06 18:00:16 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	PHILOS_H
 # define PHILOS_H
 ///		error messages		///
-# define TOO_MANY_ARGS "Wrong argument count.\n"
-# define INVALID_ARGS "Invalid arguments.\n"
-# define INVALID_PHILOS "Invalid number of philos.\n"
-# define MUTEX_FAIL "Mutex failed to create.\n"
-# define ALLOC_FAIL "Failed to malloc.\n"
-# define GET_TIME_ERR "Failed to get time.\n"
+# define TOO_MANY_ARGS	"Wrong argument count.\n"
+# define INVALID_ARGS	"Invalid arguments.\n"
+# define INVALID_PHILOS	"Invalid number of philos.\n"
+# define MUTEX_FAIL		"Mutex failed to create.\n"
+# define ALLOC_FAIL		"Failed to malloc.\n"
+# define GET_TIME_ERR	"Failed to get time.\n"
 ///		action messages		///
-# define EAT "is eating"
-# define FORK "has taken a fork"
-# define SLEEP "is sleeping"
-# define THINK "is thinking"
-# define DIED "died"
+# define EAT			"is eating"
+# define FORK			"has taken a fork"
+# define SLEEP			"is sleeping"
+# define THINK			"is thinking"
+# define DIED			"died"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -96,6 +96,7 @@ void	ft_sleep(int64_t ms, t_data *data);
 ///		routine and actions			///
 void	*routine(void *arg);
 void	eating(t_philos *philo);
+void	single_philo(t_philos *philo);
 void	sleeping(t_philos *philo);
 void	thinking(t_philos *philo);
 
@@ -112,5 +113,7 @@ int		check_meals(t_data *data);
 void	destroy_fork_mutexes(t_data *data, int count);
 void	destroy_meal_mutex(t_data *data, int count);
 void	cleanup(t_data *data);
+void	destroy_print_and_death_mutex(t_data *data);
+void	destroy_multiple_mutexes(t_data *data);
 
 #endif // PHILOS_H

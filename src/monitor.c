@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 13:02:10 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/06 09:13:12 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/06 17:43:17 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int	check_death(t_data *data)
 		if (get_time() - data->philos[i].last_meal > data->time_to_d)
 		{
 			pthread_mutex_unlock(&data->philos[i].meal_mutex);
-			print_status(&data->philos[i], DIED);
 			pthread_mutex_lock(&data->death_mutex);
 			data->death_flag = 1;
 			pthread_mutex_unlock(&data->death_mutex);
+			print_status(&data->philos[i], DIED);
 			return (1);
 		}
 		pthread_mutex_unlock(&data->philos[i].meal_mutex);
@@ -71,7 +71,7 @@ void	*monitor_r(void *arg)
 	{
 		if (check_death(data) || check_meals(data))
 			return (NULL);
-		usleep(100);
+		usleep(50);
 	}
 	return (NULL);
 }
