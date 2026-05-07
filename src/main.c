@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 15:20:39 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/07 15:56:34 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 19:24:51 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@ int	join_all(t_data *data, pthread_t monitor)
 	i = 0;
 	while (i < data->p_num)
 	{
-		if (pthread_join(data->philos[i].thread, NULL) != 0)
-			break ;
+		pthread_join(data->philos[i].thread, NULL);
 		i++;
 	}
-	if (pthread_join(monitor, NULL) != 0)
-		return (1);
+	pthread_join(monitor, NULL);
 	return (0);
 }
 
@@ -39,12 +37,11 @@ int	create_philo_threads(t_data *data)
 		if (pthread_create(&data->philos[i].thread,
 				NULL, routine, &data->philos[i]) != 0)
 		{
+			data->ready = -1;
+			pthread_mutex_unlock(&data->ready_mutex);
 			j = 0;
 			while (j < i)
-			{
-				if (pthread_join(data->philos[j++].thread, NULL) != 0)
-					break ;
-			}
+				pthread_join(data->philos[j++].thread, NULL);
 			return (1);
 		}
 		i++;
@@ -64,11 +61,15 @@ int	main(int ac, char **av)
 	data.start = get_time();
 	if (init_philos(&data) == 1)
 		return (ERR_INIT_PHILO);
+	if (pthread_mutex_init(&data.ready_mutex, NULL) != 0)
+		return (cleanup(&data), 1);
+	pthread_mutex_lock(&data.ready_mutex);
 	if (pthread_create(&monitor, NULL, monitor_r, &data) != 0)
-		return (1);
+		return (cleanup(&data), 1);
 	if (create_philo_threads(&data) == 1)
-		return (1);
-	if (join_all(&data, monitor) == 1)
-		return (1);
+		return (pthread_join(monitor, NULL), cleanup(&data), 1);
+	pthread_mutex_unlock(&data.ready_mutex);
+	join_all(&data, monitor);
+	pthread_mutex_destroy(&data.ready_mutex);
 	return (cleanup(&data), SUCCESS);
 }

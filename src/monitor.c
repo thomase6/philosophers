@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 13:02:10 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/07 15:45:14 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 19:09:19 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ void	*monitor_r(void *arg)
 	t_data	*data;
 
 	data = (t_data *)arg;
+	pthread_mutex_lock(&data->ready_mutex);
+	if (data->ready == -1)
+		return (pthread_mutex_unlock(&data->ready_mutex), NULL);
+	pthread_mutex_unlock(&data->ready_mutex);
 	while (1)
 	{
 		if (check_death(data) || check_meals(data))

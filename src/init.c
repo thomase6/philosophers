@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 13:35:48 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/07 16:18:05 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 19:04:59 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	init_data(t_data *data, char **av)
 	data->time_to_e = ft_atoi(av[3]) * 1000;
 	data->time_to_s = ft_atoi(av[4]) * 1000;
 	data->num_of_meals = -1;
+	data->ready = 0;
 	if (av[5])
 		data->num_of_meals = ft_atoi(av[5]);
 	data->death_flag = 0;
