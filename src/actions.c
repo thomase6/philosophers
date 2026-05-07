@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:29:44 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/06 18:05:14 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 14:51:20 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,24 @@
 
 void	thinking(t_philos *philo)
 {
+	int64_t tte = philo->data->time_to_e;
+	int64_t tts = philo->data->time_to_s;
+	int64_t ttt;
+	
+	ttt = 0;
 	print_status(philo, THINK);
+	if (philo->data->p_num % 2 == 0)
+	{
+		ttt = (tte - tts) * (tte > tts);
+		if (ttt == 0)
+			ttt = 1;
+		ft_sleep(ttt, philo->data);
+	}
 	if (philo->data->p_num % 2 != 0)
-		ft_sleep(philo->data->time_to_e, philo->data);
+	{
+		ttt = (tte * 2) - tts * ((tte + tte) > tts);
+		ft_sleep(ttt, philo->data);
+	}
 }
 
 void	sleeping(t_philos *philo)

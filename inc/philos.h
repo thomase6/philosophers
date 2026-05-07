@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 09:15:43 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/06 18:00:16 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 11:26:53 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdint.h>
 
 typedef struct s_data	t_data;
 typedef struct s_philos	t_philos;
@@ -43,7 +44,7 @@ typedef struct s_data
 	int64_t	time_to_s;
 	int64_t	num_of_meals;
 	int64_t	start;
-	int64_t	death_flag;
+	int	death_flag;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	*forks;

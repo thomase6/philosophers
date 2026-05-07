@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 09:13:32 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/06 17:21:33 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 13:27:13 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	ft_sleep(int64_t ms, t_data *data)
 	{
 		if(is_dead(data))
 			break;
-		usleep(100);
+		usleep(3);
 	}
 }

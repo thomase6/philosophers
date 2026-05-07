@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 15:20:39 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/06 15:06:10 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 09:16:44 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	main(int ac, char **av)
 		}
 		i++;
 	}
-	if (pthread_join(monitor, NULL) != 0)
-		return (cleanup(&data), 1);
 	i = 0;
 	while (i < data.p_num)
 	{
@@ -52,5 +50,7 @@ int	main(int ac, char **av)
 			break ;
 		i++;
 	}
+	if (pthread_join(monitor, NULL) != 0)
+		return (cleanup(&data), 1);
 	return (cleanup(&data), SUCCESS);
 }
