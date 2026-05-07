@@ -6,11 +6,11 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 14:03:49 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/06 13:10:31 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 15:39:46 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/philos.h"
+#include "../inc/philos.h"
 
 void	destroy_multiple_mutexes(t_data *data)
 {
@@ -27,7 +27,7 @@ void	destroy_print_and_death_mutex(t_data *data)
 void	destroy_meal_mutex(t_data *data, int count)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < count)
 	{
@@ -41,7 +41,7 @@ void	destroy_meal_mutex(t_data *data, int count)
 void	destroy_fork_mutexes(t_data *data, int count)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < count)
 	{

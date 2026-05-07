@@ -6,11 +6,11 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 09:15:43 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/07 11:26:53 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 15:56:39 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PHILOS_H
+#ifndef PHILOS_H
 # define PHILOS_H
 ///		error messages		///
 # define TOO_MANY_ARGS	"Wrong argument count.\n"
@@ -38,29 +38,29 @@ typedef struct s_philos	t_philos;
 
 typedef struct s_data
 {
-	int64_t	p_num;
-	int64_t	time_to_d;
-	int64_t	time_to_e;
-	int64_t	time_to_s;
-	int64_t	num_of_meals;
-	int64_t	start;
-	int	death_flag;
+	int64_t			p_num;
+	int64_t			time_to_d;
+	int64_t			time_to_e;
+	int64_t			time_to_s;
+	int64_t			num_of_meals;
+	int64_t			start;
+	int				death_flag;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	*forks;
-	t_philos	*philos;	
+	t_philos		*philos;	
 }	t_data;
 
-typedef struct	s_philos
+typedef struct s_philos
 {
-	pthread_t thread;
-	int64_t	id;
-	int64_t	last_meal;
-	int64_t	meals_eaten;
+	pthread_t		thread;
+	int64_t			id;
+	int64_t			last_meal;
+	int64_t			meals_eaten;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	meal_mutex;
-	t_data	*data;
+	t_data			*data;
 }	t_philos;
 
 typedef enum e_error
@@ -109,6 +109,10 @@ int		is_dead(t_data *data);
 void	*monitor_r(void *arg);
 int		check_death(t_data *data);
 int		check_meals(t_data *data);
+
+///		main helpers		///
+int	create_philo_threads(t_data *data);
+int	join_all(t_data *data, pthread_t monitor);
 
 ///		cleanup		///
 void	destroy_fork_mutexes(t_data *data, int count);

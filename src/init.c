@@ -6,16 +6,16 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 13:35:48 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/06 16:46:59 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 15:42:49 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/philos.h"
+#include "../inc/philos.h"
 
 int	init_mutex(t_data *data)
 {
 	int	i;
-	
+
 	if (pthread_mutex_init(&data->death_mutex, NULL) != 0)
 		return (1);
 	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
@@ -26,7 +26,7 @@ int	init_mutex(t_data *data)
 	i = 0;
 	while (i < data->p_num)
 	{
-		if(pthread_mutex_init(&data->forks[i], NULL) != 0)
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
 		{
 			destroy_print_and_death_mutex(data);
 			destroy_fork_mutexes(data, i);
@@ -57,9 +57,9 @@ int	init_philos(t_data *data)
 	int	i;
 
 	data->philos = malloc(sizeof(t_philos) * data->p_num);
-	if(!data->philos)
-		return (destroy_multiple_mutexes(data), 
-		ft_putstr_fd(ALLOC_FAIL, 2), 1);
+	if (!data->philos)
+		return (destroy_multiple_mutexes(data),
+			ft_putstr_fd(ALLOC_FAIL, 2), 1);
 	i = 0;
 	while (i < data->p_num)
 	{

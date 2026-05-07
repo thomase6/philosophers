@@ -6,11 +6,11 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 14:31:29 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/05 10:36:29 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 15:05:45 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/philos.h"
+#include "../inc/philos.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -25,7 +25,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (s[i])
 		i++;

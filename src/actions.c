@@ -6,18 +6,20 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 11:29:44 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/07 14:51:20 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 15:41:19 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/philos.h"
+#include "../inc/philos.h"
 
 void	thinking(t_philos *philo)
 {
-	int64_t tte = philo->data->time_to_e;
-	int64_t tts = philo->data->time_to_s;
-	int64_t ttt;
-	
+	int64_t	tte;
+	int64_t	tts;
+	int64_t	ttt;
+
+	tte = philo->data->time_to_e;
+	tts = philo->data->time_to_s;
 	ttt = 0;
 	print_status(philo, THINK);
 	if (philo->data->p_num % 2 == 0)
@@ -59,7 +61,7 @@ void	pick_forks(t_philos *philo)
 		print_status(philo, FORK);
 	}
 	else
-	{ 
+	{
 		pthread_mutex_lock(philo->left_fork);
 		print_status(philo, FORK);
 		pthread_mutex_lock(philo->right_fork);
@@ -88,7 +90,7 @@ void	eating(t_philos *philo)
 		pthread_mutex_unlock(philo->left_fork);
 	}
 	else
-	{ 
+	{
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(philo->right_fork);
 	}

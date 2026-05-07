@@ -6,11 +6,11 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 09:34:13 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/05 10:36:46 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 15:05:16 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/philos.h"
+#include "../inc/philos.h"
 
 int	is_overflow(char *str)
 {

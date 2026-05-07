@@ -6,17 +6,17 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 13:02:10 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/06 17:43:17 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 15:45:14 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/philos.h"
+#include "../inc/philos.h"
 
 int	check_meals(t_data *data)
 {
 	int		i;
 	int64_t	full;
-	
+
 	if (data->num_of_meals == -1)
 		return (0);
 	full = 0;
@@ -41,7 +41,7 @@ int	check_meals(t_data *data)
 
 int	check_death(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->p_num)
