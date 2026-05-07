@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 13:35:48 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/07 15:42:49 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 16:18:05 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	init_mutex(t_data *data)
 int	init_data(t_data *data, char **av)
 {
 	data->p_num = ft_atoi(av[1]);
-	data->time_to_d = ft_atoi(av[2]);
-	data->time_to_e = ft_atoi(av[3]);
-	data->time_to_s = ft_atoi(av[4]);
+	data->time_to_d = ft_atoi(av[2]) * 1000;
+	data->time_to_e = ft_atoi(av[3]) * 1000;
+	data->time_to_s = ft_atoi(av[4]) * 1000;
 	data->num_of_meals = -1;
 	if (av[5])
 		data->num_of_meals = ft_atoi(av[5]);

@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 10:03:59 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/07 15:39:31 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 16:22:52 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	is_dead(t_data *data)
 
 void	print_status(t_philos *philo, char *msg)
 {
+	int64_t	timestamp;
+
+	timestamp = 0;
 	pthread_mutex_lock(&philo->data->print_mutex);
 	pthread_mutex_lock(&philo->data->death_mutex);
 	if (philo->data->death_flag == 1 && ft_strcmp(msg, DIED))
@@ -32,7 +35,8 @@ void	print_status(t_philos *philo, char *msg)
 		pthread_mutex_unlock(&philo->data->print_mutex);
 		return ;
 	}
-	printf("%ld %ld %s\n", get_time() - philo->data->start, philo->id, msg);
+	timestamp = (get_time() - philo->data->start) / 1000;
+	printf("%ld %ld %s\n", timestamp, philo->id, msg);
 	pthread_mutex_unlock(&philo->data->death_mutex);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }

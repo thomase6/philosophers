@@ -6,7 +6,7 @@
 /*   By: texenber <texenber@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 09:13:32 by texenber          #+#    #+#             */
-/*   Updated: 2026/05/07 15:43:40 by texenber         ###   ########.fr       */
+/*   Updated: 2026/05/07 17:10:06 by texenber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int64_t	get_time(void)
 
 	if (gettimeofday(&tv, NULL) == -1)
 		ft_putstr_fd(GET_TIME_ERR, 2);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+	return ((tv.tv_sec * 1000000) + (tv.tv_usec));
 }
 
 void	ft_sleep(int64_t ms, t_data *data)
@@ -30,6 +30,6 @@ void	ft_sleep(int64_t ms, t_data *data)
 	{
 		if (is_dead(data))
 			break ;
-		usleep(3);
+		usleep(100);
 	}
 }
